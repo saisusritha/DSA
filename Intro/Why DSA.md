@@ -141,6 +141,6 @@ With DSA:
 
 DSA exists because:
 
-> writing correct code is easy — writing **fast, scalable code is hard**
+> writing correct code isn't sufficient — writing **fast, scalable code is necessary**
 
 ---
