@@ -246,5 +246,3 @@ DSA is not about memorizing solutions.
 
 ---
 
-If you want next, I can:
-👉 give you a “how to identify which pattern a problem belongs to” checklist (this is what actually makes people crack interviews)
