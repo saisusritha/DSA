@@ -408,6 +408,206 @@ int factorial(int n) {
 💡 **Important:** Always have a **base case**, or the recursion will go **infinite and crash**.
 
 ---
+### 6. Now we’re diving into **how Java handles numbers and division, including type conversion**. Let’s break it down carefully so it makes sense, and you can add it to your Java `basics.md` file.
+
+---
+
+## 🔹 Division in Java & Type Conversions
+
+### 1️⃣ Integer Division (`int / int`)
+
+* If **both operands are integers**, Java performs **integer division**.
+* **Decimal part is truncated**, not rounded.
+
+```java
+int a = 7;
+int b = 2;
+System.out.println(a / b); // Output: 3
+```
+
+💡 Reason: Java knows both are integers, so it only keeps the whole number part.
+
+---
+
+### 2️⃣ Floating-Point Division (`float` or `double`)
+
+* If **any operand is a floating-point type**, Java performs **decimal division**.
+
+```java
+double a = 7;
+double b = 2;
+System.out.println(a / b); // Output: 3.5
+```
+
+* You can **force a number to be float/double** using **suffixes**:
+
+  * `5f` → float
+  * `5d` → double (optional, default for decimals is double)
+
+```java
+System.out.println(5f / 2f);  // 2.5 (float division)
+System.out.println(5d / 2);   // 2.5 (double division)
+```
+
+💡 Tip: Writing `5f` explicitly tells Java, “Hey, treat this as a float.”
+
+---
+
+### 3️⃣ Type Conversion (Casting)
+
+* Sometimes we want **decimal division with integers**.
+* Use **casting** to convert one operand to `float` or `double`:
+
+```java
+int x = 7, y = 2;
+System.out.println((double)x / y); // 3.5
+System.out.println((float)x / y);  // 3.5
+```
+
+* **Rules:**
+
+  * Java automatically **promotes smaller types** (`byte`, `short`) to `int` in arithmetic operations.
+  * Mixed types (`int` + `double`) → result is **promoted to larger type** (`double`).
+
+---
+
+### 4️⃣ Why `5f`, `6f` etc.
+
+* By default, **decimal numbers** like `5.0` are **double**.
+* `float` uses **4 bytes**, `double` uses **8 bytes**.
+* Adding `f` ensures the number is **stored as float**. Without `f`, Java treats it as double, which can cause **type mismatch errors** in float variables:
+
+```java
+float f = 5.0;  // ❌ Error: 5.0 is double
+float f2 = 5.0f; // ✅ Correct
+```
+
+---
+
+### 5️⃣ Summary Table
+
+| Operands           | Result Type | Example               | Output |
+| ------------------ | ----------- | --------------------- | ------ |
+| int / int          | int         | 7 / 2                 | 3      |
+| int / double       | double      | 7 / 2.0               | 3.5    |
+| float / int        | float       | 5f / 2                | 2.5    |
+| double / float     | double      | 5.0 / 2f              | 2.5    |
+| byte/short in expr | int         | byte b1=5,b2=2; b1/b2 | 2      |
+
+---
+
+## 🔹 Key Takeaways
+
+1. **Division operator `/`** behaves differently depending on types.
+2. **Integer division** truncates decimals; **floating-point division** keeps decimals.
+3. **`f` and `d` suffixes** control type explicitly (`float` or `double`).
+4. **Casting** lets you control the type to get decimal division when needed.
+5. Java automatically **promotes smaller types** to avoid errors.
+
+### 7. Let’s expand your Java basics section with **primitive types, their storage, and behavior**, including how integers, floats, doubles, and longs are stored in memory. This will help you understand division, type promotion, and memory efficiency too.
+
+---
+
+# 🔹 Java Primitive Data Types
+
+Java has **8 primitive types**. These are **not objects**, stored directly in memory, and are the building blocks of all Java programs.
+
+| Type      | Size    | Default Value | Example                  | Range / Notes                 |
+| --------- | ------- | ------------- | ------------------------ | ----------------------------- |
+| `byte`    | 1 byte  | 0             | `byte b = 100;`          | -128 to 127                   |
+| `short`   | 2 bytes | 0             | `short s = 1000;`        | -32,768 to 32,767             |
+| `int`     | 4 bytes | 0             | `int i = 100000;`        | -2³¹ to 2³¹-1                 |
+| `long`    | 8 bytes | 0L            | `long l = 10000000000L;` | -2⁶³ to 2⁶³-1                 |
+| `float`   | 4 bytes | 0.0f          | `float f = 5.5f;`        | ~6-7 decimal digits           |
+| `double`  | 8 bytes | 0.0d          | `double d = 5.555555;`   | ~15-16 decimal digits         |
+| `char`    | 2 bytes | '\u0000'      | `char c = 'A';`          | Unicode characters 0 to 65535 |
+| `boolean` | 1 bit   | false         | `boolean flag = true;`   | true / false                  |
+
+---
+
+## 🔹 How Numbers Are Stored
+
+### 1️⃣ **Integers (`byte`, `short`, `int`, `long`)**
+
+* Stored in **binary using two’s complement** for signed numbers.
+* Two’s complement allows **positive and negative numbers** with simple addition/subtraction.
+* Example:
+
+  * `int x = -5` → Stored as 32-bit binary: `11111111 11111111 11111111 11111011`
+
+💡 Tip: Integer division truncates the decimal part because the CPU uses **binary integer arithmetic** for these types.
+
+---
+
+### 2️⃣ **Floating-Point Numbers (`float`, `double`)**
+
+* Stored using **IEEE 754 standard**:
+
+  * **Sign bit** (1 bit) → positive or negative
+  * **Exponent** → scales the number
+  * **Mantissa (fraction)** → precision bits
+
+Example: `float f = 5.5f;`
+
+* 4 bytes are split as:
+
+  * 1 bit sign, 8 bits exponent, 23 bits mantissa
+
+* `double` is **8 bytes**: 1 bit sign, 11 bits exponent, 52 bits mantissa → more precision
+
+💡 Tip: Floats are **less precise** than doubles. Use float for memory optimization and double for accuracy.
+
+---
+
+### 3️⃣ **Type Casting & Promotion**
+
+* **Automatic Promotion:** Smaller types are promoted to larger types in expressions to avoid overflow.
+
+  * Example: `byte + byte → int` automatically
+* **Explicit Casting:** Needed to convert larger types to smaller types.
+
+  * Example: `(int)5.7 → 5`
+* **Division Example:**
+
+  * `int / int → int` (truncates)
+  * `(double)int / int → double` (decimal preserved)
+
+---
+
+### 4️⃣ **Long Numbers & Suffix**
+
+* Java assumes integer literals are `int` by default.
+* To store larger numbers in `long` → append `L` or `l`:
+
+  ```java
+  long bigNum = 10000000000L; // L is required
+  ```
+* Similarly, floating-point literals are **double by default**. Use `f` for float:
+
+  ```java
+  float f = 5.5f;
+  ```
+
+---
+
+### 5️⃣ **Boolean**
+
+* True/False → cannot be stored as 0/1 like C. Only `true` or `false`.
+
+### 6️⃣ **Character**
+
+* 2 bytes → stores **Unicode characters**, not ASCII only.
+* Allows **international characters** like `char c = 'π';`.
+
+---
+
+### 🔹 Key Takeaways
+
+1. **Memory size matters**: `int` = 4 bytes, `long` = 8 bytes, `float` = 4 bytes, `double` = 8 bytes.
+2. **Integer division truncates**, floating-point preserves decimals.
+3. **Type promotion and casting** control precision and memory usage.
+4. Always use **suffixes** (`f`, `L`) to avoid type mismatches.
+
 
 
 ---
