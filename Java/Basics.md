@@ -46,7 +46,50 @@
 
 ---
 
-### 1.4 Assignment Operators
+### 1.4 Bitwise Operators in Java
+
+Bitwise operators work on **binary representations** of integers (`int`, `long`, `short`, `byte`).
+
+| Operator             | Symbol | Description                           | Example                                 |
+| -------------------- | ------ | ------------------------------------- | --------------------------------------- |
+| AND                  | `&`    | Performs bitwise AND                  | `5 & 3 → 0101 & 0011 = 0001 → 1`        |
+| OR                   | `\|`   | Performs bitwise OR                   | `5 \| 3 → 0101 \| 0011 = 0111 → 7`      |
+| XOR                  | `^`    | Performs bitwise XOR                  | `5 ^ 3 → 0101 ^ 0011 = 0110 → 6`        |
+| NOT                  | `~`    | Bitwise complement                    | `~5 → ~0101 = 1010` (in 32-bit int: -6) |
+| Left shift           | `<<`   | Shifts bits to left, fills 0 on right | `5 << 1 → 0101 << 1 = 1010 → 10`        |
+| Right shift          | `>>`   | Shifts bits to right, preserves sign  | `5 >> 1 → 0101 >> 1 = 0010 → 2`         |
+| Unsigned right shift | `>>>`  | Shifts bits to right, fills 0         | `-5 >>> 1 → shifts with 0 fill`         |
+
+---
+
+### 🔹 Example Code
+
+```java
+public class BitwiseExample {
+    public static void main(String[] args) {
+        int a = 5;  // 0101
+        int b = 3;  // 0011
+
+        System.out.println(a & b);  // 1
+        System.out.println(a | b);  // 7
+        System.out.println(a ^ b);  // 6
+        System.out.println(~a);     // -6
+        System.out.println(a << 1); // 10
+        System.out.println(a >> 1); // 2
+        System.out.println(a >>> 1);// 2
+    }
+}
+```
+
+---
+
+💡 **Fun Fact:**
+Bitwise operators are super useful for **competitive programming**, **encryption**, and **low-level optimizations**. For example, checking if a number is even or odd can be done with `n & 1`.
+
+---
+
+
+### 1.5 Assignment Operators
 
 | Operator | Meaning             | Example              |
 | -------- | ------------------- | -------------------- |
@@ -172,75 +215,6 @@ switch(day) {
     default: System.out.println("Other day");
 }
 ```
-
----
-
-## 5️⃣ Functions (Methods) in Java
-
-* **Method = reusable block of code**
-* **Syntax**:
-
-```java
-returnType methodName(parameters) {
-    // code
-}
-```
-
-### 5.1 Four Types of Functions
-
-| Type                    | Description                       | Example                                                    |
-| ----------------------- | --------------------------------- | ---------------------------------------------------------- |
-| **No input, No output** | No parameters, does not return    | `void greet() { System.out.println("Hi"); }`               |
-| **Input, No output**    | Takes parameters, does not return | `void printSum(int a, int b) { System.out.println(a+b); }` |
-| **No input, Output**    | No parameters, returns value      | `int getRandom() { return 42; }`                           |
-| **Input, Output**       | Takes parameters, returns value   | `int sum(int a, int b) { return a+b; }`                    |
-
----
-
-### 5.2 Call by Value vs Call by Reference
-
-* **Call by Value** (Java default for primitives) → a **copy of the value** is passed
-
-```java
-void changeValue(int x) {
-    x = 100; // changes only local copy
-}
-
-int a = 10;
-changeValue(a); // a is still 10
-```
-
-* **Call by Reference** (objects) → reference to original object is passed
-
-```java
-class Point {
-    int x;
-}
-Point p = new Point();
-p.x = 5;
-void changePoint(Point pt) {
-    pt.x = 10;
-}
-changePoint(p);
-System.out.println(p.x); // prints 10
-```
-
-💡 **Tip:** Java **always passes by value**, but **object references themselves are passed by value**, which makes it behave like call by reference for objects.
-
----
-
-✅ This file now covers everything in **one place**:
-
-* Operators
-* Input/output & Scanner class explained word by word
-* Loops (`for`, `while`, `do-while`)
-* Control statements (`if`, `switch`)
-* Functions (four types)
-* Call by value & call by reference
-
----
-
-Absolutely! Let’s expand the **functions (methods) section** in your `basics.md` so it’s extremely detailed, beginner-friendly, and shows every nuance of Java methods. I’ll also add examples, rules, and more explanation about parameters, return types, overloading, and scope.
 
 ---
 
