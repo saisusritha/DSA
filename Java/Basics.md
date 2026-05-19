@@ -408,7 +408,7 @@ int factorial(int n) {
 💡 **Important:** Always have a **base case**, or the recursion will go **infinite and crash**.
 
 ---
-### 6. Now we’re diving into **how Java handles numbers and division, including type conversion**. Let’s break it down carefully so it makes sense, and you can add it to your Java `basics.md` file.
+### 6. Now we’re diving into **how Java handles numbers and division, including type conversion**. 
 
 ---
 
